@@ -251,4 +251,17 @@ public partial class NumberInWordsUnitTests
         var (number, _) = new NumberConverter(numberInWords);
         Assert.That(number, Is.EqualTo(expectedNumber));
     }
+    
+    [Test]
+    [TestCase("ten thousand", 10000)]
+    [TestCase("twenty four thousand three hundred twenty five", 24325)]
+    [TestCase("one hundred thousand", 100000)]
+    [TestCase("eight hundred ninety thousand one hundred fifty four", 890154)]
+    [TestCase("ninety four thousand one hundred fifty four", 94154)]
+    [TestCase("nine hundred ninety two thousand three hundred forty two", 992342)]
+    public void ShouldConvertRandomBigNumbersFrom9999to999999(string numberInWords, int expectedNumber)
+    {
+        var (number, _) = new NumberConverter(numberInWords);
+        Assert.That(number, Is.EqualTo(expectedNumber));
+    }
 }
