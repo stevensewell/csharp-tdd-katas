@@ -4,7 +4,7 @@ public class NumberConverter
 {
     private readonly decimal _number;
     private readonly string _numberInWords;
-    
+
     public NumberConverter(decimal number)
     {
         _number = number;
@@ -13,7 +13,7 @@ public class NumberConverter
 
     private string ConvertNumberToWords(decimal number)
     {
-       return number switch
+        return number switch
         {
             <= 10 => NumberDictionary.Ones.TryGetValue(number, out var value) ? value : string.Empty,
             < 20 => NumberDictionary.Teens.TryGetValue(number, out var value) ? value : string.Empty,
@@ -29,13 +29,13 @@ public class NumberConverter
     {
         var baseNumber = Math.Floor(number / scale);
         var remainder = number % scale;
-        
+
         var baseNumbers = new List<string>
         {
             $"{ConvertNumberToWords(baseNumber)} {(NumberDictionary.Scales.TryGetValue(scale, out var value) ? value : string.Empty)}",
             ConvertNumberToWords(remainder)
         };
-        
+
         return string.Join(" ", baseNumbers.Where(x => !string.IsNullOrEmpty(x)));
     }
 
@@ -56,31 +56,35 @@ public class NumberConverter
 
     private decimal ConvertWordsToNumber(string numberInWords)
     {
-        Func<string, decimal> MapNumberPart() =>
-            s =>
-            {
-                var matchingOnes = NumberDictionary.Ones.FirstOrDefault(x => x.Value == s).Key;
-                var matchingTeens = NumberDictionary.Teens.FirstOrDefault(x => x.Value == s).Key;
-                var matchingTens = NumberDictionary.Tens.FirstOrDefault(x => x.Value == s).Key;
-                
-                return new List<decimal> {matchingOnes, matchingTeens, matchingTens}.Max();
-            };
+        decimal MapNumberPart(string s)
+        {
+            var matchingOnes = NumberDictionary.Ones.FirstOrDefault(x => x.Value == s).Key;
+            var matchingTeens = NumberDictionary.Teens.FirstOrDefault(x => x.Value == s).Key;
+            var matchingTens = NumberDictionary.Tens.FirstOrDefault(x => x.Value == s).Key;
 
-        var matchingScale = NumberDictionary.Scales.FirstOrDefault(x => numberInWords.Contains(x.Value)).Key;
-        var multiplier = matchingScale > 0 ? matchingScale : 1;
+            return new List<decimal> {matchingOnes, matchingTeens, matchingTens}.Max();
+        }
         
-        var splitWords = numberInWords.Split(" ");
+        decimal GetClosestScale(IEnumerable<string> inWords, int index)
+        {
+            var nextScale = inWords
+                .Skip(index + 1)
+                .FirstOrDefault(s => NumberDictionary.Scales.ContainsValue(s));
+            
+            return NumberDictionary.Scales.FirstOrDefault(x => x.Value == nextScale).Key;
+        }
 
-        return splitWords
-            .Select(MapNumberPart())
-            .Sum()
-            * multiplier;
+        var inWords = numberInWords.Split(' ');
+
+        return inWords
+            .Select((s, i) => new {s, n = MapNumberPart(s), closestScale = GetClosestScale(inWords, i)})
+            .Select(x => x.closestScale == 0 ? x.n : x.n * x.closestScale)
+            .Sum();
     }
-
+    
     public void Deconstruct(out decimal number, out string numberInWords)
     {
         number = _number;
         numberInWords = _numberInWords;
     }
-
 }

@@ -149,7 +149,7 @@ public partial class NumberInWordsUnitTests
     [TestCase("seven", 7)]
     [TestCase("eight", 8)]
     [TestCase("nine", 9)]
-    public void ShouldConvert1UpTo9(string numberInWords, int expectedNumber)
+    public void ShouldConvertStrings1UpTo9(string numberInWords, int expectedNumber)
     {
         var (number, _) = new NumberConverter(numberInWords);
         Assert.That(number, Is.EqualTo(expectedNumber));
@@ -166,7 +166,7 @@ public partial class NumberInWordsUnitTests
     [TestCase("seventeen", 17)]
     [TestCase("eighteen", 18)]
     [TestCase("nineteen", 19)]
-    public void ShouldConvert10UpTo19(string numberInWords, int expectedNumber)
+    public void ShouldConvertStrings10UpTo19(string numberInWords, int expectedNumber)
     {
         var (number, _) = new NumberConverter(numberInWords);
         Assert.That(number, Is.EqualTo(expectedNumber));
@@ -181,7 +181,7 @@ public partial class NumberInWordsUnitTests
     [TestCase("seventy", 70)]
     [TestCase("eighty", 80)]
     [TestCase("ninety", 90)]
-    public void ShouldConvert20UpTo90IncrementsOf10(string numberInWords, int expectedNumber)
+    public void ShouldConvertStrings20UpTo90IncrementsOf10(string numberInWords, int expectedNumber)
     {
         var (number, _) = new NumberConverter(numberInWords);
         Assert.That(number, Is.EqualTo(expectedNumber));
@@ -196,7 +196,7 @@ public partial class NumberInWordsUnitTests
     [TestCase("seventy six", 76)]
     [TestCase("eighty seven", 87)]
     [TestCase("ninety eight", 98)]
-    public void ShouldConvert21UpTo99IncrementsOf1(string numberInWords, int expectedNumber)
+    public void ShouldConvertStrings21UpTo99IncrementsOf1(string numberInWords, int expectedNumber)
     {
         var (number, _) = new NumberConverter(numberInWords);
         Assert.That(number, Is.EqualTo(expectedNumber));
@@ -212,7 +212,7 @@ public partial class NumberInWordsUnitTests
     [TestCase("seven hundred", 700)]
     [TestCase("eight hundred", 800)]
     [TestCase("nine hundred", 900)]
-    public void ShouldConvert100UpTo900IncrementsOf100(string numberInWords, int expectedNumber)
+    public void ShouldConvertStrings100UpTo900IncrementsOf100(string numberInWords, int expectedNumber)
     {
         var (number, _) = new NumberConverter(numberInWords);
         Assert.That(number, Is.EqualTo(expectedNumber));
@@ -220,7 +220,7 @@ public partial class NumberInWordsUnitTests
     
     [Test]
     [TestCaseSource(nameof(_100To999Source))]
-    public void ShouldConvertAllNumbersUpTo999((int, string) testCase)
+    public void ShouldConvertAllNumberStringsUpTo999((decimal, string) testCase)
     {
         var (expectedNumber, numberInWords) = testCase;
         var (number, _) = new NumberConverter(numberInWords);
@@ -237,7 +237,7 @@ public partial class NumberInWordsUnitTests
     [TestCase("seven thousand", 7000)]
     [TestCase("eight thousand", 8000)]
     [TestCase("nine thousand", 9000)]
-    public void ShouldConvert1000UpTo9000IncrementsOf1000(string numberInWords, int expectedNumber)
+    public void ShouldConvertStrings1000UpTo9000IncrementsOf1000(string numberInWords, int expectedNumber)
     {
         var (number, _) = new NumberConverter(numberInWords);
         Assert.That(number, Is.EqualTo(expectedNumber));
@@ -245,7 +245,7 @@ public partial class NumberInWordsUnitTests
     
     [Test]
     [TestCaseSource(nameof(_1000To9999Source))]
-    public void ShouldConvertAllNumbersUpTo9999((int, string) testCase)
+    public void ShouldConvertAllNumberStringsUpTo9999((decimal, string) testCase)
     {
         var (expectedNumber, numberInWords) = testCase;
         var (number, _) = new NumberConverter(numberInWords);
@@ -259,7 +259,7 @@ public partial class NumberInWordsUnitTests
     [TestCase("eight hundred ninety thousand one hundred fifty four", 890154)]
     [TestCase("ninety four thousand one hundred fifty four", 94154)]
     [TestCase("nine hundred ninety two thousand three hundred forty two", 992342)]
-    public void ShouldConvertRandomBigNumbersFrom9999to999999(string numberInWords, int expectedNumber)
+    public void ShouldConvertRandomBigNumberStringsFrom9999To999999(string numberInWords, int expectedNumber)
     {
         var (number, _) = new NumberConverter(numberInWords);
         Assert.That(number, Is.EqualTo(expectedNumber));
