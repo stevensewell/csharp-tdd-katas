@@ -74,4 +74,20 @@ public partial class NumberInWordsUnitTests
         var (_, numberInWords) = new NumberConverter(number);
         Assert.That(numberInWords, Is.EqualTo(expectedNumberInWords));
     }
+    
+    [Test]
+    [TestCase(100, "one hundred")]
+    [TestCase(200, "two hundred")]
+    [TestCase(300, "three hundred")]
+    [TestCase(400, "four hundred")]
+    [TestCase(500, "five hundred")]
+    [TestCase(600, "six hundred")]
+    [TestCase(700, "seven hundred")]
+    [TestCase(800, "eight hundred")]
+    [TestCase(900, "nine hundred")]
+    public void ShouldConvert100UpTo900IncrementsOf100(int number, string expectedNumberInWords)
+    {
+        var (_, numberInWords) = new NumberConverter(number);
+        Assert.That(numberInWords, Is.EqualTo(expectedNumberInWords));
+    }
 }
