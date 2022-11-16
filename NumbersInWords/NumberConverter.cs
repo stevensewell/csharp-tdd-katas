@@ -62,15 +62,19 @@ public class NumberConverter
                 var matchingOnes = NumberDictionary.Ones.FirstOrDefault(x => x.Value == s).Key;
                 var matchingTeens = NumberDictionary.Teens.FirstOrDefault(x => x.Value == s).Key;
                 var matchingTens = NumberDictionary.Tens.FirstOrDefault(x => x.Value == s).Key;
-
+                
                 return new List<decimal> {matchingOnes, matchingTeens, matchingTens}.Max();
             };
 
+        var matchingScale = NumberDictionary.Scales.FirstOrDefault(x => numberInWords.Contains(x.Value)).Key;
+        var multiplier = matchingScale > 0 ? matchingScale : 1;
+        
         var splitWords = numberInWords.Split(" ");
 
         return splitWords
             .Select(MapNumberPart())
-            .Sum();
+            .Sum()
+            * multiplier;
     }
 
     public void Deconstruct(out decimal number, out string numberInWords)
