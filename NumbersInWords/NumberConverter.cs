@@ -19,13 +19,32 @@ public class NumberConverter
             < 20 => NumberDictionary.Teens.TryGetValue(number, out var value) ? value : string.Empty,
             <= 99 => ConvertTens(number),
             <= 999 => ConvertHundreds(number),
+            <= 999999 => ConvertThousands(number),
             _ => throw new ArgumentOutOfRangeException(nameof(number), number, null)
         };
     }
 
+    private string ConvertThousands(decimal number)
+    {
+        var baseNumbers = new List<string>
+        {
+            $"{ConvertNumberToWords(Math.Floor(number / 1000))} thousand",
+            ConvertNumberToWords(Math.Floor(number % 1000))
+        };
+        
+        return string.Join(" and ", baseNumbers.Where(x => !string.IsNullOrEmpty(x)));
+    }
+
     private  string ConvertHundreds(decimal number)
     {
-        return $"{ConvertNumberToWords(Math.Floor(number / 100))} hundred {ConvertNumberToWords(number % 100)}".Trim();
+        
+        var baseNumbers = new List<string>
+        {
+            $"{ConvertNumberToWords(Math.Floor(number / 100))} hundred",
+            ConvertNumberToWords(number % 100)
+        };
+        
+        return string.Join(" and ", baseNumbers.Where(x => !string.IsNullOrEmpty(x)));
     }
 
     private string ConvertTens(decimal number)

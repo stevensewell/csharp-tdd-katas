@@ -68,7 +68,7 @@ public partial class NumberInWordsUnitTests
 
     [Test]
     [TestCaseSource(nameof(_21To99Source))]
-    public void ShouldConvertAllNumbersUpTo99((int, string) testCase)
+    public void ShouldConvertAllNumbersUpTo99((decimal, string) testCase)
     {
         var (number, expectedNumberInWords) = testCase;
         var (_, numberInWords) = new NumberConverter(number);
@@ -85,7 +85,7 @@ public partial class NumberInWordsUnitTests
     [TestCase(700, "seven hundred")]
     [TestCase(800, "eight hundred")]
     [TestCase(900, "nine hundred")]
-    public void ShouldConvert100UpTo900IncrementsOf100(int number, string expectedNumberInWords)
+    public void ShouldConvert100UpTo900IncrementsOf100(decimal number, string expectedNumberInWords)
     {
         var (_, numberInWords) = new NumberConverter(number);
         Assert.That(numberInWords, Is.EqualTo(expectedNumberInWords));
@@ -93,9 +93,25 @@ public partial class NumberInWordsUnitTests
     
     [Test]
     [TestCaseSource(nameof(_100To999Source))]
-    public void ShouldConvertAllNumbersUpTo999((int, string) testCase)
+    public void ShouldConvertAllNumbersUpTo999((decimal, string) testCase)
     {
         var (number, expectedNumberInWords) = testCase;
+        var (_, numberInWords) = new NumberConverter(number);
+        Assert.That(numberInWords, Is.EqualTo(expectedNumberInWords));
+    }
+    
+    [Test]
+    [TestCase(1000, "one thousand")]
+    [TestCase(2000, "two thousand")]
+    [TestCase(3000, "three thousand")]
+    [TestCase(4000, "four thousand")]
+    [TestCase(5000, "five thousand")]
+    [TestCase(6000, "six thousand")]
+    [TestCase(7000, "seven thousand")]
+    [TestCase(8000, "eight thousand")]
+    [TestCase(9000, "nine thousand")]
+    public void ShouldConvert1000UpTo9000IncrementsOf1000(decimal number, string expectedNumberInWords)
+    {
         var (_, numberInWords) = new NumberConverter(number);
         Assert.That(numberInWords, Is.EqualTo(expectedNumberInWords));
     }
