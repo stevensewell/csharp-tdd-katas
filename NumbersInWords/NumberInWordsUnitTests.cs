@@ -67,7 +67,7 @@ public partial class NumberInWordsUnitTests
     }
 
     [Test]
-    [TestCaseSource(nameof(_21to99source))]
+    [TestCaseSource(nameof(_21To99Source))]
     public void ShouldConvertAllNumbersUpTo99((int, string) testCase)
     {
         var (number, expectedNumberInWords) = testCase;
@@ -90,4 +90,14 @@ public partial class NumberInWordsUnitTests
         var (_, numberInWords) = new NumberConverter(number);
         Assert.That(numberInWords, Is.EqualTo(expectedNumberInWords));
     }
+    
+    [Test]
+    [TestCaseSource(nameof(_100To999Source))]
+    public void ShouldConvertAllNumbersUpTo999((int, string) testCase)
+    {
+        var (number, expectedNumberInWords) = testCase;
+        var (_, numberInWords) = new NumberConverter(number);
+        Assert.That(numberInWords, Is.EqualTo(expectedNumberInWords));
+    }
+
 }
