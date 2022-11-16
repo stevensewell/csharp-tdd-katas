@@ -54,34 +54,54 @@ public class NumberConverter
         _number = ConvertWordsToNumber(numberInWords);
     }
 
-    private decimal ConvertWordsToNumber(string numberInWords)
+    private decimal ConvertWordsToNumber(string num)
     {
-        decimal MapNumberPart(string s)
-        {
-            var matchingOnes = NumberDictionary.Ones.FirstOrDefault(x => x.Value == s).Key;
-            var matchingTeens = NumberDictionary.Teens.FirstOrDefault(x => x.Value == s).Key;
-            var matchingTens = NumberDictionary.Tens.FirstOrDefault(x => x.Value == s).Key;
-
-            return new List<decimal> {matchingOnes, matchingTeens, matchingTens}.Max();
-        }
+        var words = num.Split(" ");
         
-        decimal GetClosestScale(IEnumerable<string> inWords, int index)
-        {
-            var nextScale = inWords
-                .Skip(index + 1)
-                .FirstOrDefault(s => NumberDictionary.Scales.ContainsValue(s));
-            
-            return NumberDictionary.Scales.FirstOrDefault(x => x.Value == nextScale).Key;
-        }
-
-        var inWords = numberInWords.Split(' ');
-
-        return inWords
-            .Select((s, i) => new {s, n = MapNumberPart(s), closestScale = GetClosestScale(inWords, i)})
-            .Select(x => x.closestScale == 0 ? x.n : x.n * x.closestScale)
-            .Sum();
+        var x = words.Aggregate(
+            (low: 0m, total: 0m),
+            (acc, word) => GetCumulativeTotal(word, acc.low, acc.total));
+        
+        return x.low + x.total;
     }
-    
+
+    private (decimal, decimal) GetCumulativeTotal(string word, decimal low, decimal total)
+    {
+        var x = new
+        {
+            lowV = GetLowNumberFromKey(word),
+            scaleV = GetScaleFromKey(word)
+        };
+
+        return x switch
+        {
+            { } when x.lowV != 0 => (x.lowV + low, total),
+            { } when x.scaleV != 0 && x.scaleV == 100 => (low * 100, total),
+            _ => (0, total + low * x!.scaleV)
+        };
+    }
+
+    private decimal GetLowNumberFromKey(string key)
+    {
+        var dictionaries = new List<Dictionary<decimal, string>>
+        {
+            NumberDictionary.Ones,
+            NumberDictionary.Teens,
+            NumberDictionary.Tens
+        };
+
+        return dictionaries
+            .Select(d => d.ContainsValue(key) ? d.FirstOrDefault(p => p.Value == key).Key : 0)
+            .FirstOrDefault(x => x != 0);
+    }
+
+    private decimal GetScaleFromKey(string key)
+    {
+        return NumberDictionary.Scales.ContainsValue(key)
+            ? NumberDictionary.Scales.FirstOrDefault(p => p.Value == key).Key
+            : 0;
+    }
+
     public void Deconstruct(out decimal number, out string numberInWords)
     {
         number = _number;
