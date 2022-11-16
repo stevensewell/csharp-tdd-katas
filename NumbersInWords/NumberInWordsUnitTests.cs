@@ -186,4 +186,19 @@ public partial class NumberInWordsUnitTests
         var (number, _) = new NumberConverter(numberInWords);
         Assert.That(number, Is.EqualTo(expectedNumber));
     }
+    
+    [Test]
+    [TestCase("twenty one", 21)]
+    [TestCase("thirty two", 32)]
+    [TestCase("forty three", 43)]
+    [TestCase("fifty four", 54)]
+    [TestCase("sixty five", 65)]
+    [TestCase("seventy six", 76)]
+    [TestCase("eighty seven", 87)]
+    [TestCase("ninety eight", 98)]
+    public void ShouldConvert21UpTo99IncrementsOf1(string numberInWords, int expectedNumber)
+    {
+        var (number, _) = new NumberConverter(numberInWords);
+        Assert.That(number, Is.EqualTo(expectedNumber));
+    }
 }
