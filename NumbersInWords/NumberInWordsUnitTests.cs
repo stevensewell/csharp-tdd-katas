@@ -18,4 +18,20 @@ public class NumberInWordsUnitTests
         var (_, numberInWords) = new NumberConverter(number);
         Assert.That(numberInWords, Is.EqualTo(expectedNumberInWords));
     }
+    
+    [Test]
+    [TestCase(11, "eleven")]
+    [TestCase(12, "twelve")]
+    [TestCase(13, "thirteen")]
+    [TestCase(14, "fourteen")]
+    [TestCase(15, "fifteen")]
+    [TestCase(16, "sixteen")]
+    [TestCase(17, "seventeen")]
+    [TestCase(18, "eighteen")]
+    [TestCase(19, "nineteen")]
+    public void ShouldConvert11UpTo19(int number, string expectedNumberInWords)
+    {
+        var (_, numberInWords) = new NumberConverter(number);
+        Assert.That(numberInWords, Is.EqualTo(expectedNumberInWords));
+    }
 }
