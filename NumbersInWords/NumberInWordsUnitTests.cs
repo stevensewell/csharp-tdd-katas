@@ -1,6 +1,6 @@
 namespace NumbersInWords;
 
-public class NumberInWordsUnitTests
+public partial class NumberInWordsUnitTests
 {
     [Test]
     [TestCase(1, "one")]
@@ -18,7 +18,7 @@ public class NumberInWordsUnitTests
         var (_, numberInWords) = new NumberConverter(number);
         Assert.That(numberInWords, Is.EqualTo(expectedNumberInWords));
     }
-    
+
     [Test]
     [TestCase(11, "eleven")]
     [TestCase(12, "twelve")]
@@ -34,7 +34,7 @@ public class NumberInWordsUnitTests
         var (_, numberInWords) = new NumberConverter(number);
         Assert.That(numberInWords, Is.EqualTo(expectedNumberInWords));
     }
-    
+
     [Test]
     [TestCase(20, "twenty")]
     [TestCase(30, "thirty")]
@@ -49,7 +49,7 @@ public class NumberInWordsUnitTests
         var (_, numberInWords) = new NumberConverter(number);
         Assert.That(numberInWords, Is.EqualTo(expectedNumberInWords));
     }
-    
+
     [Test]
     [TestCase(21, "twenty one")]
     [TestCase(22, "twenty two")]
@@ -62,6 +62,15 @@ public class NumberInWordsUnitTests
     [TestCase(29, "twenty nine")]
     public void ShouldConvert21UpTo29(int number, string expectedNumberInWords)
     {
+        var (_, numberInWords) = new NumberConverter(number);
+        Assert.That(numberInWords, Is.EqualTo(expectedNumberInWords));
+    }
+
+    [Test]
+    [TestCaseSource(nameof(_21to99source))]
+    public void ShouldConvertAllNumbersUpTo99((int, string) testCase)
+    {
+        var (number, expectedNumberInWords) = testCase;
         var (_, numberInWords) = new NumberConverter(number);
         Assert.That(numberInWords, Is.EqualTo(expectedNumberInWords));
     }

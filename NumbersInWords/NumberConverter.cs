@@ -17,9 +17,18 @@ public class NumberConverter
         {
             <= 10 => NumberDictionary.Ones.TryGetValue(number, out var value) ? value : string.Empty,
             < 20 => NumberDictionary.Teens.TryGetValue(number, out var value) ? value : string.Empty,
-            <= 99 => NumberDictionary.Tens.TryGetValue(number, out var value) ? value : string.Empty,
+            <= 99 => ConvertTens(number),
             _ => throw new ArgumentOutOfRangeException(nameof(number), number, null)
         };
+    }
+
+    private static string ConvertTens(decimal number)
+    {
+        var remainder = number % 10;
+        var baseNumber = number - remainder;
+        var ones = NumberDictionary.Ones.TryGetValue(remainder, out var onesValue) ? onesValue : string.Empty;
+        var tens = NumberDictionary.Tens.TryGetValue(baseNumber, out var tensValue) ? tensValue : string.Empty;
+        return $"{tens} {ones}".Trim();
     }
 
     public NumberConverter(string numberInWords)
