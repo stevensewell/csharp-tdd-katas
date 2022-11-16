@@ -137,4 +137,21 @@ public partial class NumberInWordsUnitTests
         var (_, numberInWords) = new NumberConverter(number);
         Assert.That(numberInWords, Is.EqualTo(expectedNumberInWords));
     }
+    
+    //other way around -> words to number
+    [Test]
+    [TestCase("one", 1)]
+    [TestCase("two", 2)]
+    [TestCase("three", 3)]
+    [TestCase("four", 4)]
+    [TestCase("five", 5)]
+    [TestCase("six", 6)]
+    [TestCase("seven", 7)]
+    [TestCase("eight", 8)]
+    [TestCase("nine", 9)]
+    public void ShouldConvert1UpTo9(string numberInWords, int expectedNumber)
+    {
+        var (number, _) = new NumberConverter(numberInWords);
+        Assert.That(number, Is.EqualTo(expectedNumber));
+    }
 }
