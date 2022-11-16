@@ -226,5 +226,20 @@ public partial class NumberInWordsUnitTests
         var (number, _) = new NumberConverter(numberInWords);
         Assert.That(number, Is.EqualTo(expectedNumber));
     }
-
+    
+    [Test]
+    [TestCase("one thousand", 1000)]
+    [TestCase("two thousand", 2000)]
+    [TestCase("three thousand", 3000)]
+    [TestCase("four thousand", 4000)]
+    [TestCase("five thousand", 5000)]
+    [TestCase("six thousand", 6000)]
+    [TestCase("seven thousand", 7000)]
+    [TestCase("eight thousand", 8000)]
+    [TestCase("nine thousand", 9000)]
+    public void ShouldConvert1000UpTo9000IncrementsOf1000(string numberInWords, int expectedNumber)
+    {
+        var (number, _) = new NumberConverter(numberInWords);
+        Assert.That(number, Is.EqualTo(expectedNumber));
+    }
 }
