@@ -56,7 +56,10 @@ public class NumberConverter
 
     private decimal ConvertWordsToNumber(string numberInWords)
     {
-        return NumberDictionary.Ones.FirstOrDefault(x => x.Value == numberInWords).Key;
+        var matchingOnes = NumberDictionary.Ones.FirstOrDefault(x => x.Value == numberInWords).Key;
+        var matchingTeens = NumberDictionary.Teens.FirstOrDefault(x => x.Value == numberInWords).Key;
+        
+        return new List<decimal> { matchingOnes, matchingTeens }.Max();
     }
 
     public void Deconstruct(out decimal number, out string numberInWords)
