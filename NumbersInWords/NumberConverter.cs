@@ -16,7 +16,9 @@ public class NumberConverter
        return number switch
         {
             <= 10 => NumberDictionary.Ones.TryGetValue(number, out var value) ? value : string.Empty,
-            <= 20 => NumberDictionary.Teens.TryGetValue(number, out var value) ? value : string.Empty,
+            < 20 => NumberDictionary.Teens.TryGetValue(number, out var value) ? value : string.Empty,
+            <= 99 => NumberDictionary.Tens.TryGetValue(number, out var value) ? value : string.Empty,
+            _ => throw new ArgumentOutOfRangeException(nameof(number), number, null)
         };
     }
 

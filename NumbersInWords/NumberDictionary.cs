@@ -28,5 +28,17 @@ public class NumberDictionary
         {18, "eighteen"},
         {19, "nineteen"}
     };
+    
+    public static Dictionary<decimal, string> Tens = new()
+    {
+        {20, "twenty"},
+        {30, "thirty"},
+        {40, "forty"},
+        {50, "fifty"},
+        {60, "sixty"},
+        {70, "seventy"},
+        {80, "eighty"},
+        {90, "ninety"}
+    };
 
 }
