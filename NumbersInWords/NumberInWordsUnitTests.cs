@@ -49,4 +49,20 @@ public class NumberInWordsUnitTests
         var (_, numberInWords) = new NumberConverter(number);
         Assert.That(numberInWords, Is.EqualTo(expectedNumberInWords));
     }
+    
+    [Test]
+    [TestCase(21, "twenty one")]
+    [TestCase(22, "twenty two")]
+    [TestCase(23, "twenty three")]
+    [TestCase(24, "twenty four")]
+    [TestCase(25, "twenty five")]
+    [TestCase(26, "twenty six")]
+    [TestCase(27, "twenty seven")]
+    [TestCase(28, "twenty eight")]
+    [TestCase(29, "twenty nine")]
+    public void ShouldConvert21UpTo29(int number, string expectedNumberInWords)
+    {
+        var (_, numberInWords) = new NumberConverter(number);
+        Assert.That(numberInWords, Is.EqualTo(expectedNumberInWords));
+    }
 }
