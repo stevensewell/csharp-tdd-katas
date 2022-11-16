@@ -217,4 +217,14 @@ public partial class NumberInWordsUnitTests
         var (number, _) = new NumberConverter(numberInWords);
         Assert.That(number, Is.EqualTo(expectedNumber));
     }
+    
+    [Test]
+    [TestCaseSource(nameof(_100To999Source))]
+    public void ShouldConvertAllNumbersUpTo999((int, string) testCase)
+    {
+        var (expectedNumber, numberInWords) = testCase;
+        var (number, _) = new NumberConverter(numberInWords);
+        Assert.That(number, Is.EqualTo(expectedNumber));
+    }
+
 }
