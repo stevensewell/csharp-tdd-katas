@@ -26,13 +26,16 @@ public class NumberConverter
 
     private string ConvertThousands(decimal number)
     {
+        var thousands = Math.Floor(number / 1000);
+        var remainder = number % 1000;
+        
         var baseNumbers = new List<string>
         {
-            $"{ConvertNumberToWords(Math.Floor(number / 1000))} thousand",
-            ConvertNumberToWords(Math.Floor(number % 1000))
+            $"{ConvertNumberToWords(thousands)} thousand",
+            ConvertNumberToWords(remainder)
         };
         
-        return string.Join(" and ", baseNumbers.Where(x => !string.IsNullOrEmpty(x)));
+        return string.Join(remainder > 100 ? " " : " and ", baseNumbers.Where(x => !string.IsNullOrEmpty(x)));
     }
 
     private  string ConvertHundreds(decimal number)
