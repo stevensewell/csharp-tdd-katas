@@ -12,10 +12,12 @@ public class NumberConverter
     }
 
     private string ConvertNumberToWords(decimal number)
-    { 
-        NumberDictionary.Ones.TryGetValue(number, out var ones);
-        
-        return ones ?? "Error";
+    {
+       return number switch
+        {
+            <= 10 => NumberDictionary.Ones.TryGetValue(number, out var value) ? value : string.Empty,
+            <= 20 => NumberDictionary.Teens.TryGetValue(number, out var value) ? value : string.Empty,
+        };
     }
 
     public NumberConverter(string numberInWords)
