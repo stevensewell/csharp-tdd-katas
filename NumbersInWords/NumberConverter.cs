@@ -18,33 +18,22 @@ public class NumberConverter
             <= 10 => NumberDictionary.Ones.TryGetValue(number, out var value) ? value : string.Empty,
             < 20 => NumberDictionary.Teens.TryGetValue(number, out var value) ? value : string.Empty,
             <= 99 => ConvertTens(number),
-            <= 999 => ConvertHundreds(number),
-            <= 999999 => ConvertThousands(number),
+            <= 999 => ConvertScale(number, 100),
+            <= 999999 => ConvertScale(number, 1000),
+            <= 999999999 => ConvertScale(number, 1000000),
             _ => throw new ArgumentOutOfRangeException(nameof(number), number, null)
         };
     }
 
-    private string ConvertThousands(decimal number)
+    private string ConvertScale(decimal number, int scale = 100)
     {
-        var thousands = Math.Floor(number / 1000);
-        var remainder = number % 1000;
+        var baseNumber = Math.Floor(number / scale);
+        var remainder = number % scale;
         
         var baseNumbers = new List<string>
         {
-            $"{ConvertNumberToWords(thousands)} thousand",
+            $"{ConvertNumberToWords(baseNumber)} {(NumberDictionary.Scales.TryGetValue(scale, out var value) ? value : string.Empty)}",
             ConvertNumberToWords(remainder)
-        };
-        
-        return string.Join(" ", baseNumbers.Where(x => !string.IsNullOrEmpty(x)));
-    }
-
-    private  string ConvertHundreds(decimal number)
-    {
-        
-        var baseNumbers = new List<string>
-        {
-            $"{ConvertNumberToWords(Math.Floor(number / 100))} hundred",
-            ConvertNumberToWords(number % 100)
         };
         
         return string.Join(" ", baseNumbers.Where(x => !string.IsNullOrEmpty(x)));
