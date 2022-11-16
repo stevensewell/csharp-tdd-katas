@@ -56,11 +56,21 @@ public class NumberConverter
 
     private decimal ConvertWordsToNumber(string numberInWords)
     {
-        var matchingOnes = NumberDictionary.Ones.FirstOrDefault(x => x.Value == numberInWords).Key;
-        var matchingTeens = NumberDictionary.Teens.FirstOrDefault(x => x.Value == numberInWords).Key;
-        var matchingTens = NumberDictionary.Tens.FirstOrDefault(x => x.Value == numberInWords).Key;
-        
-        return new List<decimal> { matchingOnes, matchingTeens, matchingTens }.Max();
+        Func<string, decimal> MapNumberPart() =>
+            s =>
+            {
+                var matchingOnes = NumberDictionary.Ones.FirstOrDefault(x => x.Value == s).Key;
+                var matchingTeens = NumberDictionary.Teens.FirstOrDefault(x => x.Value == s).Key;
+                var matchingTens = NumberDictionary.Tens.FirstOrDefault(x => x.Value == s).Key;
+
+                return new List<decimal> {matchingOnes, matchingTeens, matchingTens}.Max();
+            };
+
+        var splitWords = numberInWords.Split(" ");
+
+        return splitWords
+            .Select(MapNumberPart())
+            .Sum();
     }
 
     public void Deconstruct(out decimal number, out string numberInWords)
