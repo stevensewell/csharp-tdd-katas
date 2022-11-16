@@ -51,8 +51,14 @@ public class NumberConverter
     public NumberConverter(string numberInWords)
     {
         _numberInWords = numberInWords;
+        _number = ConvertWordsToNumber(numberInWords);
     }
- 
+
+    private decimal ConvertWordsToNumber(string numberInWords)
+    {
+        return NumberDictionary.Ones.FirstOrDefault(x => x.Value == numberInWords).Key;
+    }
+
     public void Deconstruct(out decimal number, out string numberInWords)
     {
         number = _number;
