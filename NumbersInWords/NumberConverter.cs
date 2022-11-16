@@ -58,8 +58,9 @@ public class NumberConverter
     {
         var matchingOnes = NumberDictionary.Ones.FirstOrDefault(x => x.Value == numberInWords).Key;
         var matchingTeens = NumberDictionary.Teens.FirstOrDefault(x => x.Value == numberInWords).Key;
+        var matchingTens = NumberDictionary.Tens.FirstOrDefault(x => x.Value == numberInWords).Key;
         
-        return new List<decimal> { matchingOnes, matchingTeens }.Max();
+        return new List<decimal> { matchingOnes, matchingTeens, matchingTens }.Max();
     }
 
     public void Deconstruct(out decimal number, out string numberInWords)
