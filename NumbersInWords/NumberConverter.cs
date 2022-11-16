@@ -18,11 +18,17 @@ public class NumberConverter
             <= 10 => NumberDictionary.Ones.TryGetValue(number, out var value) ? value : string.Empty,
             < 20 => NumberDictionary.Teens.TryGetValue(number, out var value) ? value : string.Empty,
             <= 99 => ConvertTens(number),
+            <= 999 => ConvertHundreds(number),
             _ => throw new ArgumentOutOfRangeException(nameof(number), number, null)
         };
     }
 
-    private static string ConvertTens(decimal number)
+    private  string ConvertHundreds(decimal number)
+    {
+        return $"{ConvertNumberToWords(Math.Floor(number / 100))} hundred {ConvertNumberToWords(number % 100)}".Trim();
+    }
+
+    private string ConvertTens(decimal number)
     {
         var remainder = number % 10;
         var baseNumber = number - remainder;
