@@ -8,7 +8,14 @@ public class NumberConverter
     public NumberConverter(decimal number)
     {
         _number = number;
-        _numberInWords = "one";
+        _numberInWords = ConvertNumberToWords(number);
+    }
+
+    private string ConvertNumberToWords(decimal number)
+    { 
+        NumberDictionary.Ones.TryGetValue(number, out var ones);
+        
+        return ones ?? "Error";
     }
 
     public NumberConverter(string numberInWords)
