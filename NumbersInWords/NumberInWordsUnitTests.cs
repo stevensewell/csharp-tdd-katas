@@ -171,4 +171,19 @@ public partial class NumberInWordsUnitTests
         var (number, _) = new NumberConverter(numberInWords);
         Assert.That(number, Is.EqualTo(expectedNumber));
     }
+    
+    [Test]
+    [TestCase("twenty", 20)]
+    [TestCase("thirty", 30)]
+    [TestCase("forty", 40)]
+    [TestCase("fifty", 50)]
+    [TestCase("sixty", 60)]
+    [TestCase("seventy", 70)]
+    [TestCase("eighty", 80)]
+    [TestCase("ninety", 90)]
+    public void ShouldConvert20UpTo90IncrementsOf10(string numberInWords, int expectedNumber)
+    {
+        var (number, _) = new NumberConverter(numberInWords);
+        Assert.That(number, Is.EqualTo(expectedNumber));
+    }
 }
