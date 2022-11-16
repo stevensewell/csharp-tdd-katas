@@ -35,7 +35,7 @@ public class NumberConverter
             ConvertNumberToWords(remainder)
         };
         
-        return string.Join(remainder > 100 ? " " : " and ", baseNumbers.Where(x => !string.IsNullOrEmpty(x)));
+        return string.Join(" ", baseNumbers.Where(x => !string.IsNullOrEmpty(x)));
     }
 
     private  string ConvertHundreds(decimal number)
@@ -47,7 +47,7 @@ public class NumberConverter
             ConvertNumberToWords(number % 100)
         };
         
-        return string.Join(" and ", baseNumbers.Where(x => !string.IsNullOrEmpty(x)));
+        return string.Join(" ", baseNumbers.Where(x => !string.IsNullOrEmpty(x)));
     }
 
     private string ConvertTens(decimal number)
