@@ -22,4 +22,10 @@ public static class FizzBuzz
     {
         Assert.That(DetermineFizzBuzz(3), Is.EqualTo("Fizz"));
     }
+    
+    [Test]
+    public static void DivisibleByFive()
+    {
+        Assert.That(DetermineFizzBuzz(5), Is.EqualTo("Buzz"));
+    }
 }
