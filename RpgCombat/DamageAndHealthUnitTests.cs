@@ -7,6 +7,13 @@ public class DamageAndHealthUnitTests
   public void CharacterShouldHaveStartingHealthOf1000()
   {
     var character = new Character();
-    Assert.AreEqual(1000, character.Health);
+    Assert.That(character.Health, Is.EqualTo(1000));
+  }
+  
+  [Test]
+  public void CharacterShouldStartAsAlive()
+  {
+    var character = new Character();
+    Assert.That(character.IsAlive, Is.True);
   }
 }
