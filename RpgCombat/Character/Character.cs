@@ -11,5 +11,9 @@ public class Character
 
   public bool IsAlive => Health > 0;
 
-  public void DealDamage(Character defender, int i) => defender.Health -= i;
+  public void DealDamage(Character defender, int i)
+  {
+    if(defender == this) return;
+    defender.Health -= i;
+  }
 }
