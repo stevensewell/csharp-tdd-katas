@@ -16,5 +16,9 @@ public class Character
     if (defender != this) defender.Health -= i;
   }
 
-  public void Heal(int i) => Health += i;
+  public void Heal(int i)
+  {
+    if(!IsAlive) return;
+    Health += i;
+  }
 }
