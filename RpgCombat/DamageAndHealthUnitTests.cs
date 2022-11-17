@@ -34,4 +34,13 @@ public class DamageAndHealthUnitTests
     attacker.DealDamage(defender, 1000);
     Assert.That(defender.IsAlive, Is.False);
   }
+  
+  //A Character cannot Deal Damage to itself
+  [Test]
+  public void CharacterCannotDealDamageToItself()
+  {
+    var attacker = new Character();
+    attacker.DealDamage(attacker, 100);
+    Assert.That(attacker.Health, Is.EqualTo(1000));
+  }
 }
