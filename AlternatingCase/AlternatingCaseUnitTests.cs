@@ -1,4 +1,5 @@
 namespace AlternatingCase;
+using Extensions;
 
 public class Tests
 {
@@ -12,6 +13,6 @@ public class Tests
     [TestCase("1a2b3c4d5e", "1A2B3C4D5E")]
     public void ShouldAlternateCase(string input, string expected)
     {
-        Assert.AreEqual(expected, input.ToAlternativeString(input));
+        Assert.That(input.ToAlternatingCase(), Is.EqualTo(expected));
     }
 }
