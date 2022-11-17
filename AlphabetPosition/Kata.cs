@@ -2,7 +2,7 @@
 
 public class Kata
 {
-  public static object? AlphabetPosition(string input)
+  public static string AlphabetPosition(string input)
   {
     return input.Select(CalculatePosition).Aggregate((acc, next) => string.IsNullOrWhiteSpace(next) ? acc : $"{acc} {next}");
   }
