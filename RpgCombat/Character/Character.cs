@@ -9,7 +9,7 @@ public class Character
     Health = 1000;
   }
 
-  public bool IsAlive => Health >= 0;
+  public bool IsAlive => Health > 0;
 
   public void DealDamage(Character defender, int i) => defender.Health -= i;
 }
