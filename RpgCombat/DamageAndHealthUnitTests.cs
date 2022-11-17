@@ -54,4 +54,15 @@ public class DamageAndHealthUnitTests
     defender.Heal(100);
     Assert.That(defender.Health, Is.EqualTo(1000));
   }
+  
+  //Dead characters cannot heal
+  [Test]
+  public void DeadCharacterCannotHeal()
+  {
+    var attacker = new Character();
+    var defender = new Character();
+    attacker.DealDamage(defender, 1000);
+    defender.Heal(100);
+    Assert.That(defender.Health, Is.EqualTo(0));
+  }
 }
