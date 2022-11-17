@@ -2,6 +2,9 @@
 
 public static class FizzBuzz
 {
+    private const string Fizz = "Fizz";
+    private const string Buzz = "Buzz";
+    
     public static string Calculate(int count)
     {
         var list = Enumerable.Range(1, count)
@@ -18,9 +21,9 @@ public static class FizzBuzz
         
         return number switch
         {
-            _ when divisibleByThree && divisibleByFive => "FizzBuzz",
-            _ when divisibleByThree => "Fizz",
-            _ when divisibleByFive => "Buzz",
+            _ when divisibleByThree && divisibleByFive => $"{Fizz}{Buzz}",
+            _ when divisibleByThree => Fizz,
+            _ when divisibleByFive => Buzz,
             _ => number.ToString()
         };
     }
@@ -28,19 +31,19 @@ public static class FizzBuzz
     [Test]
     public static void DivisibleByThree()
     {
-        Assert.That(DetermineFizzBuzz(3), Is.EqualTo("Fizz"));
+        Assert.That(DetermineFizzBuzz(3), Is.EqualTo(Fizz));
     }
     
     [Test]
     public static void DivisibleByFive()
     {
-        Assert.That(DetermineFizzBuzz(5), Is.EqualTo("Buzz"));
+        Assert.That(DetermineFizzBuzz(5), Is.EqualTo(Buzz));
     }
     
     [Test]
     public static void DivisibleByThreeAndFive()
     {
-        Assert.That(DetermineFizzBuzz(15), Is.EqualTo("FizzBuzz"));
+        Assert.That(DetermineFizzBuzz(15), Is.EqualTo($"{Fizz}{Buzz}"));
     }
     
     [Test]
