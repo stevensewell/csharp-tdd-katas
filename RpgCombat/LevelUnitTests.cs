@@ -29,4 +29,19 @@ public class LevelUnitTests
     character.LevelUp(); //6
     Assert.That(character.Health, Is.EqualTo(1500));
   }
+  
+  //If the target is 5 or more Levels above the attacker, Damage is reduced by 50%
+  [Test]
+  public void ShouldReduceDamageBy50PercentIfTargetIs5OrMoreLevelsAboveTheAttacker()
+  {
+    var attacker = new Character();
+    var target = new Character();
+    target.LevelUp(); //2
+    target.LevelUp(); //3
+    target.LevelUp(); //4
+    target.LevelUp(); //5
+    target.LevelUp(); //6
+    attacker.DealDamage(target, 100); //deal 50% of 100 = 50
+    Assert.That(target.Health, Is.EqualTo(1450));
+  }
 }
