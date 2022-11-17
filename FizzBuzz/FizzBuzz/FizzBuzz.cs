@@ -39,4 +39,10 @@ public static class FizzBuzz
     {
         Assert.That(DetermineFizzBuzz(15), Is.EqualTo("FizzBuzz"));
     }
+    
+    [Test]
+    public static void NotDivisibleByThreeOrFive()
+    {
+        Assert.That(DetermineFizzBuzz(1), Is.EqualTo("1"));
+    }
 }
