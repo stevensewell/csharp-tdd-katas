@@ -7,7 +7,7 @@ public class Tests
     [TestCase("pear tree", 4)]
     [TestCase("o a e asd rfbwe", 5)]
     [TestCase("aeiou", 5)]
-    [TestCase("aypyx", 0)]
+    [TestCase("yypyx", 0)]
     public void ShouldCalculateNumberOfVowels(string input, int expected)
     {
         var actual = VowelCount.Calculate(input);
