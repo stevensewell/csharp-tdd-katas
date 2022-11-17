@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace Extensions
 {
@@ -7,7 +8,6 @@ namespace Extensions
         public static string ToAlternatingCase (this string s)
         {
             return s
-                .ToCharArray()
                 .Select(AlternateCase)
                 .Aggregate((x, y) => x + y);
         }
