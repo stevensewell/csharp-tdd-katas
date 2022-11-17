@@ -16,4 +16,17 @@ public class LevelUnitTests
     var character = new Character();
     Assert.That(character.Health, Is.EqualTo(1000));
   }
+  
+  //when the maximum increases to 1500
+  [Test]
+  public void CharacterCanHaveMaxHealthOf1500AtLevel6()
+  {
+    var character = new Character();
+    character.LevelUp(); //2
+    character.LevelUp(); //3
+    character.LevelUp(); //4
+    character.LevelUp(); //5
+    character.LevelUp(); //6
+    Assert.That(character.Health, Is.EqualTo(1500));
+  }
 }

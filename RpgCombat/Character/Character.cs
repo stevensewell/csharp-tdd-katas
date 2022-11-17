@@ -4,7 +4,9 @@ public class Character
 {
   public int Health { get; private set; }
   public int Level { get; private set; }
-  
+
+  private int _maxHealth { get; set; }
+
   public Character()
   {
     Health = 1000;
@@ -20,7 +22,17 @@ public class Character
 
   public void Heal(int i)
   {
-    if(!IsAlive) return;
+    if (!IsAlive) return;
     Health += i;
+  }
+
+  public void LevelUp()
+  {
+    Level++;
+    
+    if(Level == 6)
+      _maxHealth = 1500;
+    
+    Health = _maxHealth;
   }
 }
