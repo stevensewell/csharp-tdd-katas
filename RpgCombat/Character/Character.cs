@@ -17,7 +17,15 @@ public class Character
 
   public void DealDamage(Character defender, int i)
   {
-    if (defender != this) defender.Health -= i;
+    if (defender == this) return;
+    var levelDifference = Level - defender.Level;
+    
+    
+    defender.Health = levelDifference switch
+    {
+      <= -5 => defender.Health - (i / 2),
+      _ => defender.Health - i
+    };
   }
 
   public void Heal(int i)
@@ -29,10 +37,10 @@ public class Character
   public void LevelUp()
   {
     Level++;
-    
-    if(Level == 6)
+
+    if (Level == 6)
       _maxHealth = 1500;
-    
+
     Health = _maxHealth;
   }
 }
