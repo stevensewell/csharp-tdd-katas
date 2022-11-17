@@ -43,4 +43,14 @@ public class DamageAndHealthUnitTests
     attacker.DealDamage(attacker, 100);
     Assert.That(attacker.Health, Is.EqualTo(1000));
   }
+  
+  //A Character can Heal themselves.
+  [Test]
+  public void CharacterCanHealItself()
+  {
+    var character = new Character();
+    character.DealDamage(character, 100);
+    character.Heal(100);
+    Assert.That(character.Health, Is.EqualTo(1000));
+  }
 }
