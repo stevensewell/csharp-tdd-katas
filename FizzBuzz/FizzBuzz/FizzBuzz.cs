@@ -2,11 +2,13 @@
 
 public static class FizzBuzz
 {
-    public static IList<string> Calculate(int count)
+    public static string Calculate(int count)
     {
-      return Enumerable.Range(1, count)
-        .Select(DetermineFizzBuzz)
-        .ToList();
+        var list = Enumerable.Range(1, count)
+            .Select(DetermineFizzBuzz)
+            .ToList();
+
+        return string.Join(Environment.NewLine, list);
     }
 
     private static string DetermineFizzBuzz(int number)
@@ -19,6 +21,7 @@ public static class FizzBuzz
             _ when divisibleByThree && divisibleByFive => "FizzBuzz",
             _ when divisibleByThree => "Fizz",
             _ when divisibleByFive => "Buzz",
+            _ => number.ToString()
         };
     }
     
