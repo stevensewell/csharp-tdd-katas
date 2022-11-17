@@ -14,6 +14,7 @@ public static class FizzBuzz
         return number switch
         {
             _ when number % 3 == 0 => "Fizz",
+            _ when number % 5 == 0 => "Buzz",
         };
     }
     
