@@ -1,4 +1,4 @@
-﻿namespace VowelCount.VowelCount;
+﻿namespace VowelCount;
 
 public static class VowelCount
 {
