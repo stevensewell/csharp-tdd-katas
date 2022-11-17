@@ -11,10 +11,14 @@ public static class FizzBuzz
 
     private static string DetermineFizzBuzz(int number)
     {
+        var divisibleByThree = number % 3 == 0;
+        var divisibleByFive = number % 5 == 0;
+        
         return number switch
         {
-            _ when number % 3 == 0 => "Fizz",
-            _ when number % 5 == 0 => "Buzz",
+            _ when divisibleByThree && divisibleByFive => "FizzBuzz",
+            _ when divisibleByThree => "Fizz",
+            _ when divisibleByFive => "Buzz",
         };
     }
     
