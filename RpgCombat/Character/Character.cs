@@ -2,7 +2,7 @@
 
 public class Character
 {
-  public int Health { get; }
+  public int Health { get; private set; }
   
   public Character()
   {
@@ -10,4 +10,6 @@ public class Character
   }
 
   public bool IsAlive => Health >= 0;
+
+  public void DealDamage(Character defender, int i) => defender.Health -= i;
 }
