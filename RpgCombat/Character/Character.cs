@@ -3,10 +3,12 @@
 public class Character
 {
   public int Health { get; private set; }
+  public int Level { get; private set; }
   
   public Character()
   {
     Health = 1000;
+    Level = 1;
   }
 
   public bool IsAlive => Health > 0;
