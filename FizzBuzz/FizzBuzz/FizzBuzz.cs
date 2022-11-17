@@ -29,4 +29,10 @@ public static class FizzBuzz
     {
         Assert.That(DetermineFizzBuzz(5), Is.EqualTo("Buzz"));
     }
+    
+    [Test]
+    public static void DivisibleByThreeAndFive()
+    {
+        Assert.That(DetermineFizzBuzz(15), Is.EqualTo("FizzBuzz"));
+    }
 }
