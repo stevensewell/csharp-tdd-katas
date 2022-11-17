@@ -13,7 +13,6 @@ public class Character
 
   public void DealDamage(Character defender, int i)
   {
-    if(defender == this) return;
-    defender.Health -= i;
+    if (defender != this) defender.Health -= i;
   }
 }
