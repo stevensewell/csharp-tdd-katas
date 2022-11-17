@@ -14,12 +14,9 @@ namespace Extensions
 
         private static string AlternateCase(char chr)
         {
-            return chr switch
-            {
-                _ when char.IsUpper(chr) => char.ToLower(chr).ToString(),
-                _ when char.IsLower(chr) => char.ToUpper(chr).ToString(),
-                _ => chr.ToString()
-            };
+            return char.IsUpper(chr) 
+                ? char.ToLower(chr).ToString() 
+                : char.ToUpper(chr).ToString();
         }
     }
 }
